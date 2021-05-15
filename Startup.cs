@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using AgentApi.Models;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 
 namespace AgentApi
@@ -36,10 +37,21 @@ namespace AgentApi
                                   });
             });
             services.AddDbContext<AgentContext>(opt => opt.UseInMemoryDatabase("Agent"));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AgentApi", Version = "v1" });
+            });
+            // If using Kestrel:
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
             });
         }
 

@@ -10,6 +10,7 @@ namespace AgentApi.Models
         }
 
         public DbSet<AgentItem> AgentItems { get; set; }
+        public DbSet<Resource> Resources { get; set; }
     }
 
 }
