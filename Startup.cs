@@ -31,7 +31,8 @@ namespace AgentApi
                                   {
                                       builder.WithOrigins("http://localhost:5000",
                                                           "https://localhost:5001",
-                                                          "http://localhost:3000")
+                                                          "http://localhost:3000",
+                                                          "http://portfolio.nekosaysmeow.cyou")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                                   });
